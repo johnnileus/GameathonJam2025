@@ -24,3 +24,6 @@ fov = 70.4562
 [node name="model" type="Node3D" parent="."]
 
 [node name="wolf" parent="model" instance=ExtResource("2_alof5")]
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727242, 0)

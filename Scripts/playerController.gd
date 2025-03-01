@@ -52,12 +52,13 @@ func process_movement(delta):
 	if Input.is_action_pressed("run"):
 		speed = runSpeed
 		state = states.running
-	elif Input.is_action_pressed("crouch"):
-		speed = crouchSpeed
-		state = states.crouching
 	else:
 		speed = walkSpeed
 		state = states.walking
+	
+	if Input.is_action_pressed("crouch"):
+		speed = crouchSpeed
+		state = states.crouching
 		
 		
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")

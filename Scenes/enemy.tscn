@@ -38,3 +38,6 @@ script = ExtResource("3_hk3dw")
 
 [node name="chase" type="Node3D" parent="state_machine"]
 script = ExtResource("4_ycvye")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6431, 0)
