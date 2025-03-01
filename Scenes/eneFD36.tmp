@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnrc26j7fjw2h"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_qo061"]
+[ext_resource type="Script" path="res://Scripts/enemy_fsm/state_machine.gd" id="2_tyexe"]
+[ext_resource type="Script" path="res://Scripts/enemy_fsm/patrol_state.gd" id="3_hk3dw"]
+[ext_resource type="Script" path="res://Scripts/enemy_fsm/chase_state.gd" id="4_ycvye"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pr615"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j85mx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jv08m"]
+
+[node name="enemy" type="CharacterBody3D"]
+script = ExtResource("1_qo061")
+
+[node name="model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_pr615")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="model"]
+transform = Transform3D(0.502376, 0, 0, 0, 0.41416, 0, 0, 0, 0.571208, 0, 1.43472, -0.465667)
+mesh = SubResource("BoxMesh_j85mx")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_jv08m")
+
+[node name="state_machine" type="Node3D" parent="."]
+script = ExtResource("2_tyexe")
+
+[node name="patrol" type="Node3D" parent="state_machine"]
+script = ExtResource("3_hk3dw")
+
+[node name="chase" type="Node3D" parent="state_machine"]
+script = ExtResource("4_ycvye")

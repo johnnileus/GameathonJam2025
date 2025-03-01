@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=4 uid="uid://b80rv4h48t16m"]
+
+[ext_resource type="Texture2D" uid="uid://crgxptplnfvng" path="res://Assets/BaseModels/snow_trees/snow_pine_tree_and_bush_pack_lowpoly_0.png" id="1_qbo4o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brv1a"]
+resource_name = "treebaretall"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_qbo4o")
+roughness = 0.893002
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4tu7e"]
+_surfaces = [{
+"aabb": AABB(-0.9146, -0.470583, -0.337758, 1.31334, 0.739775, 0.720715),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AAACAAEAAAADAAIABAAGAAUABAAHAAYACAAKAAkACAALAAoADAAOAA0ADAAPAA4AEAASABEAEAATABIAFAAWABUAFAAXABYAGAAaABkAGAAbABoAHAAeAB0AHAAfAB4AIAAiACEAIAAjACIAJAAmACUAJAAnACYAKAAqACkAKAArACoALAAuAC0ALAAvAC4AMAAyADEAMAAzADIANAA2ADUANAA3ADYAOAA6ADkAOAA7ADoAPAA+AD0APAA/AD4A"),
+"name": "treebaretall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("/2On2DtIAAAhn1+EIloAAKdoyGizpgAAhS0QvcyUAABIhIL34HgAAPaJOn1xWwAAGXSddRDCAABqbuXvgN8AAAk5TZR4TwAAr6EUl35OAABKovOqY9IAAKQ5LKhd0wAAqKQ2ZdKAAABbe2WhMVwAAJ17BoU2vAAA6aTXSNbgAAD//01UOq4AAG9wVaYTSgAADSbBXFpzAACctbkKgdcAADiT//9BjgAAn5uBjEFIAABuZAAAx34AAAdcfXPHxAAATd/5psFrAADqe2eLOWEAAIZz4LuHxwAA6NZy1w/SAADkhKvNAAAAAN2TsHb8ZAAAzKR/oP//AADTlXr3ApsAAHWjZb2SYgAAAIeHfzRPAAB6WPZ5tpMAAO901LcUpwAA8dN6raGFAADRdBSGjFQAAC1sYHJZqAAATcvGmW/ZAADyVOO1D2YAAPeVOohKSQAATLPUbCqzAABHcn2a788AAOt1oGdNZQAAXoiZmXFgAAAkfCR246QAALFpK0TAqQAASKSvLA9sAADPgwSlaVYAAMkh1KC+ewAAQUJ/KGSRAAC95UykzpMAAGuJuIj6QwAAAAAcYMNgAABRXLB7l7AAAG7Kw2pRUgAACXgIkLlfAABJo8qK9roAAK71hWWOrQAATad2vX8fAACkdsV85lcAAEqxBFyj0wAA8+G1nDybAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0bkbn"]
+resource_name = "Sketchfab_Scene_BushBare1_treebaretall_0"
+_surfaces = [{
+"aabb": AABB(-0.9146, -0.470583, -0.337758, 1.31334, 0.739775, 0.720715),
+"attribute_data": PackedByteArray("AABNqJDwWKiQ8AoAAAAAAAAATaiQ8FiokPAKAAAAAAAAAE2okPBYqJDwCgAAAAAAAABNqJDwWKiQ8AoAAAAAAAAATaiQ8FiokPAKAAAAAAAAAE2okPBYqJDwCgAAAAAAAABNqJDwWKiQ8AoAAAAAAAAATaiQ8FiokPAKAAAAAAAAAE2okPBYqJDwCgAAAAAAAABNqJDwWKiQ8AoAAAAAAAAATaiQ8FiokPAKAAAAAAAAAE2okPBYqJDwCgAAAAAAAABNqJDwWKiQ8AoAAAAAAAAATaiQ8FiokPAKAAAAAAAAAE2okPBYqJDwCgAAAAAAAABNqJDwWKiQ8AoAAAAAAA=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAACAAEAAAADAAIABAAGAAUABAAHAAYACAAKAAkACAALAAoADAAOAA0ADAAPAA4AEAASABEAEAATABIAFAAWABUAFAAXABYAGAAaABkAGAAbABoAHAAeAB0AHAAfAB4AIAAiACEAIAAjACIAJAAmACUAJAAnACYAKAAqACkAKAArACoALAAuAC0ALAAvAC4AMAAyADEAMAAzADIANAA2ADUANAA3ADYAOAA6ADkAOAA7ADoAPAA+AD0APAA/AD4A"),
+"material": SubResource("StandardMaterial3D_brv1a"),
+"name": "treebaretall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("/2On2DtIp9chn1+EIlpI16doyGizpmDghS0QvcyUYOBIhIL34Hgq3PaJOn1xW9zbGXSddRDCPuNqbuXvgN8+4wk5TZR4T4etr6EUl35OEK1KovOqY9LAuaQ5LKhd08C5qKQ2ZdKAmN1be2WhMVyF3Z17BoU2vILh6aTXSNbgguH//01UOq6a8m9wVaYTSrDyDSbBXFpz8++ctbkKgdfz7ziT//9Bjnjsn5uBjEFIE+xuZAAAx34V9wdcfXPHxBX3Td/5psFrn/3qe2eLOWGI/YZz4LuHx6r+6NZy1w/Sqv7khKvNAAAOtN2TsHb8ZLyzzKR/oP//lLzTlXr3ApuUvHWjZb2SYlPwAIeHfzRPAPB6WPZ5tpNd+O901LcUp1348dN6raGF7/3RdBSGjFTU/S1sYHJZqNL/TcvGmW/Z0v/yVOO1D2ZzuveVOohKSQ26TLPUbCqztsVHcn2a78+2xet1oGdNZfW9XoiZmXFgk70kfCR246SYyLFpK0TAqZjISKSvLA9spdLPgwSlaVas0skh1KC+e/vRQUJ/KGSR+9G95UykzpP5/2uJuIj6Q6//AAAcYMNgLfhRXLB7l7At+G7Kw2pRUi/2CXgIkLlfBvZJo8qK9roD/K71hWWOrQP8Tad2vX8ftOGkdsV85le74UqxBFyj053g8+G1nDybneDJMfChFjL4oYQoaqGEKGqhplDtpMdQxKRMTKioTEyoqHEBXH2dARF9TgHnfU4B5325LqQHUy6lB9Y4WQbWOFkGTO2bFKftARX74moL++JqCy1F26IGRaiirUeep61Hnqc+eYPBNnkmweB4n8rgeJ/KLGnrv1Fpm79rY1bFa2NWxTZeLrYjXuy1z17CvM9ewrzYcd+pzHGDqaRxprKkcaayfR3Cf9cdRn+IIs+HiCLPh6MdHEBYHSpALiQyPS4kMj3Z9q0NN/dIDsAUXwHAFF8B6mc6sKBnCLBryfcQa8n3EJ41pw5ANc0O0D5GCtA+RgotiuekVIp0pKKEobCihKGw")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_4tu7e")
+
+[node name="bush_1" type="Node3D"]
+
+[node name="BushBare1" type="Node3D" parent="."]
+transform = Transform3D(1.35383, -0.0613948, 1.07158, -0.645546, -0.0812932, 2.25257, -0.0204736, -1.49654, -0.166323, 0, 0, 0)
+
+[node name="BushBare1_treebaretall_0" type="MeshInstance3D" parent="BushBare1"]
+transform = Transform3D(1, -9.31323e-10, 1.05356e-08, 9.31323e-10, 1, 0, -1.88593e-08, -7.45058e-09, 1, -0.0251213, -0.00316351, 0.052595)
+mesh = SubResource("ArrayMesh_0bkbn")
+skeleton = NodePath("")

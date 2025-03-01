@@ -1,39 +1,85 @@
 extends CharacterBody3D
 
-@export var speed = 5.0
 @export var run_speed = 10.0
 @export var jump_force = 6.0
 @export var gravity = 9.8
 
-var is_running = false
+@export var sensitivity = .001
 
+var walkSpeed = 1.6
+var runSpeed = 5
+var crouchSpeed = .9
 
+enum states {
+	idle,
+	walking,
+	running,
+	crouching
+}
+var stateAnims = {
+	states.idle: "04_Idle",
+	states.walking: "02_walk",
+	states.running: "01_Run",
+	states.crouching: "03_creep"
+}
+var state = states.idle
+@onready var camera_pivot_y = $camera_pivot_y
+@onready var camera_pivot_x = $camera_pivot_y/camera_pivot_x
+@onready var camera = $camera_pivot_y/camera_pivot_x/camera
+@onready var model = $model
+@onready var wolf = $model/wolf
+@onready var anim = wolf.animation_player
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		camera_pivot_y.rotate_y(-event.relative.x * sensitivity)
+		camera_pivot_x.rotate_x(-event.relative.y * sensitivity)
+		camera_pivot_x.rotation.x = clamp(camera_pivot_x.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+
+func process_movement(delta):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = 3
+	
+	var speed
+	
+	
+	if Input.is_action_pressed("run"):
+		speed = runSpeed
+		state = states.running
+	elif Input.is_action_pressed("crouch"):
+		speed = crouchSpeed
+		state = states.crouching
+	else:
+		speed = walkSpeed
+		state = states.walking
+		
+		
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	var direction = (camera_pivot_y.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if direction != Vector3.ZERO:
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+		
+		# Correct way to rotate the model smoothly
+		var target_rotation = atan2(-direction.x, -direction.z)  # Calculate target Y rotation
+		model.rotation.y = lerp_angle(model.rotation.y, target_rotation, 0.18)  # Smooth rotation
+
+	else:
+		velocity.x = lerp(velocity.x, 0.0, delta * 15.0)
+		velocity.z = lerp(velocity.z, 0.0, delta * 15.0)
+		state = states.idle
+		
+	anim.play(stateAnims[state])
+	
 
 func _physics_process(delta):
-	var direction = Vector3.ZERO
-
-	if Input.is_action_pressed("forward"):
-		direction -= transform.basis.z
-	if Input.is_action_pressed("backward"):
-		direction += transform.basis.z
-	if Input.is_action_pressed("left"):
-		direction -= transform.basis.x
-	if Input.is_action_pressed("right"):
-		direction += transform.basis.x
-
-	if direction.length() > 0:
-		direction = direction.normalized()
-		velocity.x = direction.x * target_speed
-		velocity.z = direction.z * target_speed
-		rotation.y = lerp_angle(rotation.y, atan2(-direction.x, -direction.z), delta * 5)
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed * delta)
-		velocity.z = move_toward(velocity.z, 0, speed * delta)
-
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_force
+	process_movement(delta)
 
 	move_and_slide()

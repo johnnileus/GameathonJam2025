@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3r48gm18w5o8"]
+
+[ext_resource type="PackedScene" uid="uid://c2w07ls6xltf8" path="res://Assets/BaseModels/floor/floor.glb" id="1_088tr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqe2w"]
+size = Vector3(7.99194, 0.818115, 7.98145)
+
+[node name="floor" instance=ExtResource("1_088tr")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_uqe2w")
