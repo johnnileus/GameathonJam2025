@@ -9,6 +9,7 @@ extends CharacterBody3D
 var walkSpeed = 1.6
 var runSpeed = 5
 var crouchSpeed = .9
+var moving = false
 
 enum states {
 	idle,
@@ -47,24 +48,35 @@ func process_movement(delta):
 		velocity.y = 3
 	
 	var speed
+	var inputting = false
 	
-	
-	if Input.is_action_pressed("run"):
-		speed = runSpeed
-		state = states.running
-	else:
-		speed = walkSpeed
-		state = states.walking
-	
-	if Input.is_action_pressed("crouch"):
-		speed = crouchSpeed
-		state = states.crouching
-		
-		
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (camera_pivot_y.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction != Vector3.ZERO:
+		moving = true
+	else:
+		moving = false
+		
+	if Input.is_action_pressed("run"):
+		speed = runSpeed
+		state = states.running
+		inputting = true
+	elif Input.is_action_pressed("crouch"):
+		speed = crouchSpeed
+		state = states.crouching
+		inputting = true
+		
+	else:
+		speed = walkSpeed
+		state = states.walking
+	
+
+		
+		
+
+	
+	if moving:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
 		
@@ -75,9 +87,14 @@ func process_movement(delta):
 	else:
 		velocity.x = lerp(velocity.x, 0.0, delta * 15.0)
 		velocity.z = lerp(velocity.z, 0.0, delta * 15.0)
-		state = states.idle
-		
+		if not inputting:
+			state = states.idle
+	
 	anim.play(stateAnims[state])
+	if not moving and state == states.crouching:
+		anim.speed_scale = 0
+	else:
+		anim.speed_scale = 1
 	
 
 func _physics_process(delta):

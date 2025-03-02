@@ -1,6 +1,7 @@
 extends Node
 
 @onready var state_machine = get_parent()
+@onready var enemy = state_machine.get_parent()
 
 func enter():
 	pass

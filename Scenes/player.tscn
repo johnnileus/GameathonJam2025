@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dn3oq2ionkipb" path="res://Assets/ModelScenes/wolf.tscn" id="2_alof5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i166c"]
+height = 1.18286
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8ag21")
