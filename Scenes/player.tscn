@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://chf7uxq1q34hp"]
 
-[ext_resource type="Script" path="res://Scripts/playerController.gd" id="1_8ag21"]
+[ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_8ag21"]
 [ext_resource type="PackedScene" uid="uid://dn3oq2ionkipb" path="res://Assets/model_scenes/wolf.tscn" id="2_alof5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i166c"]

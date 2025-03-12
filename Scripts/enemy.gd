@@ -53,7 +53,6 @@ func raycast_to_player():
 		return false
 
 func update_target_pos(pos):
-	print(pos)
 	nav_agent.target_position = pos
 
 func is_player_visible():
@@ -68,11 +67,9 @@ func is_player_visible():
 	
 	if abs(diff) < deg_to_rad(sight_angle):
 		DebugDraw3D.draw_line(origin, end, Color(0,1,0))
-
 		return visible
 	else:
 		DebugDraw3D.draw_line(origin, end, Color(1,0,0))
-
 		return false
 		
 

@@ -108,6 +108,7 @@ offset_bottom = 136.0
 text = "Congratulations you won!"
 
 [node name="map" type="NavigationRegion3D" parent="." groups=["map"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0541992, 5.72205e-06, 0.0490685)
 navigation_mesh = SubResource("NavigationMesh_j62cc")
 
 [node name="floor2" parent="map" instance=ExtResource("2_f4g7l")]

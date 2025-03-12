@@ -28,7 +28,6 @@ func _process(delta):
 		var new_arrow = arrow.instantiate()
 		new_arrow.rotation = vec_angle + camera_rot.y - PI/2
 		var arrow_mesh = new_arrow.get_node("arrow")
-		print(arrow_mesh)
 		arrow_mesh.material.set_shader_parameter("alert_progress", enemy.alertness)
 
 
