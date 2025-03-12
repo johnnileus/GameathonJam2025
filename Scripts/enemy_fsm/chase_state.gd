@@ -15,7 +15,7 @@ func enter():
 func update(_delta):
 	var cur_time = Time.get_unix_time_from_system()
 	
-	var result = enemy.raycast_to_player()
+	var result = enemy.is_player_visible()
 	if result:
 		last_spotted = cur_time
 	

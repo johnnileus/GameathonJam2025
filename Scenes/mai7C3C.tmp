@@ -1,0 +1,125 @@
+[gd_scene load_steps=14 format=3 uid="uid://bmsxgwuhmekn5"]
+
+[ext_resource type="PackedScene" uid="uid://chf7uxq1q34hp" path="res://Scenes/player.tscn" id="1_k4re8"]
+[ext_resource type="PackedScene" uid="uid://d3r48gm18w5o8" path="res://Assets/model_scenes/floor.tscn" id="2_f4g7l"]
+[ext_resource type="Script" path="res://Scripts/enemy_manager.gd" id="2_gf4fp"]
+[ext_resource type="PackedScene" uid="uid://bdrp5uxfvkntf" path="res://Assets/model_scenes/tree_1.tscn" id="3_vjqxs"]
+[ext_resource type="Script" path="res://Scripts/score_manager.gd" id="4_2iwn3"]
+[ext_resource type="PackedScene" uid="uid://2rweqdnyjyyw" path="res://Assets/model_scenes/tree_2.tscn" id="4_nm3e7"]
+[ext_resource type="PackedScene" uid="uid://b7msh0khomnt" path="res://Assets/model_scenes/tree_3.tscn" id="5_cc7ow"]
+[ext_resource type="PackedScene" uid="uid://b80rv4h48t16m" path="res://Assets/model_scenes/bush_1.tscn" id="6_6rnvj"]
+[ext_resource type="PackedScene" uid="uid://da8koty4awo41" path="res://Assets/model_scenes/bush_2.tscn" id="7_aibgi"]
+[ext_resource type="PackedScene" uid="uid://bnrc26j7fjw2h" path="res://Scenes/enemy.tscn" id="8_25gt0"]
+[ext_resource type="Script" path="res://Scripts/radar_controller.gd" id="9_fsr8x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_woobw"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_j62cc"]
+vertices = PackedVector3Array(-6.25, 0.715619, 1.5, -4.75, 0.715619, 1.25, -4.25, 0.715619, 0.5, -3, 0.715619, 0.5, -2.5, 0.715619, 1, -0.5, 0.715619, 1, 0.5, 0.715619, 0.5, 0.5, 0.715619, -11.5, -11.5, 0.715619, 3, -8, 0.715619, 3, -11.5, 0.715619, -11.5, 1.5, 0.715619, 0.75, 2, 0.715619, 1.75, 11.5, 0.715619, 1.75, 11.5, 0.715619, -11.5, 1, 0.715619, 3.75, -0.5, 0.715619, 3.25, 0, 0.715619, 4, -0.5, 0.715619, 6.5, -2.5, 0.715619, 8.25, -3.75, 0.715619, 8.5, -3.75, 0.715619, 11.5, 1.75, 0.715619, 3, 11.5, 0.715619, 11.5, -8.25, 0.715619, 4.5, -7.75, 0.715619, 4.25, -6.25, 0.715619, 7.25, -6.75, 0.715619, 5.75, -8.25, 0.715619, 5.5, -5, 0.715619, 8.25, -11.5, 0.715619, 11.5)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(7, 3, 2), PackedInt32Array(0, 9, 8), PackedInt32Array(0, 8, 2), PackedInt32Array(2, 8, 10), PackedInt32Array(2, 10, 7), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 6, 13), PackedInt32Array(13, 6, 7), PackedInt32Array(13, 7, 14), PackedInt32Array(15, 17, 16), PackedInt32Array(15, 18, 17), PackedInt32Array(21, 20, 19), PackedInt32Array(15, 22, 18), PackedInt32Array(18, 22, 13), PackedInt32Array(19, 18, 21), PackedInt32Array(21, 18, 23), PackedInt32Array(23, 18, 13), PackedInt32Array(22, 12, 13), PackedInt32Array(25, 24, 9), PackedInt32Array(9, 24, 8), PackedInt32Array(28, 27, 26), PackedInt32Array(29, 20, 21), PackedInt32Array(28, 26, 8), PackedInt32Array(8, 26, 30), PackedInt32Array(30, 26, 21), PackedInt32Array(8, 24, 28), PackedInt32Array(26, 29, 21)]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_k4re8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0296059, 0.443375, -0.0266037)
+
+[node name="floor" type="Node3D" parent="."]
+transform = Transform3D(25, 0, 0, 0, 0.1, 0, 0, 0, 25, 0, -0.5, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_woobw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 4.18353, 0)
+
+[node name="enemies" type="Node3D" parent="." groups=["enemy_manager"]]
+script = ExtResource("2_gf4fp")
+
+[node name="enemy" parent="enemies" instance=ExtResource("8_25gt0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26946, 0.409057, -3.3585)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="arrows" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_fsr8x")
+
+[node name="score" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_2iwn3")
+
+[node name="score_label" type="Label" parent="UI/score"]
+layout_mode = 0
+offset_right = 149.0
+offset_bottom = 39.0
+text = "Enemies killed 0/15"
+
+[node name="time_label" type="Label" parent="UI/score"]
+layout_mode = 0
+offset_top = 33.0
+offset_right = 144.0
+offset_bottom = 72.0
+text = "Time: 0:00"
+
+[node name="map" type="NavigationRegion3D" parent="." groups=["map"]]
+navigation_mesh = SubResource("NavigationMesh_j62cc")
+
+[node name="floor2" parent="map" instance=ExtResource("2_f4g7l")]
+
+[node name="floor3" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="floor4" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="floor5" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="floor6" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="floor8" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+
+[node name="floor9" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 8)
+
+[node name="floor10" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+
+[node name="floor7" parent="map" instance=ExtResource("2_f4g7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+
+[node name="Tree1" parent="map" instance=ExtResource("3_vjqxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95996, 0.409058, 4.33114)
+
+[node name="tree_2" parent="map" instance=ExtResource("4_nm3e7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00044, 0.409058, -8.12288)
+
+[node name="tree_3" parent="map" instance=ExtResource("5_cc7ow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.74403, 0.409058, -5.44416)
+
+[node name="bush_1" parent="map" instance=ExtResource("6_6rnvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.451253, 2)
+
+[node name="bush_2" parent="map" instance=ExtResource("7_aibgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.452641, 0.409058, 2.05383)

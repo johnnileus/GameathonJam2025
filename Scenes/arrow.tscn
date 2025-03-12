@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ipp2fek7ui8"]
+
+[ext_resource type="Script" path="res://Scripts/arrow.gd" id="1_7opk2"]
+[ext_resource type="Shader" path="res://Shaders/arrow.gdshader" id="1_npdwr"]
+[ext_resource type="Texture2D" uid="uid://cm8boko7c6vfa" path="res://Assets/sprites/arrow_mask.jpg" id="2_65loy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xune8"]
+resource_local_to_scene = true
+shader = ExtResource("1_npdwr")
+shader_parameter/alert_progress = 0.505
+shader_parameter/fill_col = Vector4(0.8, 0.8, 0.08, 1)
+shader_parameter/alert_col = Vector4(0.8, 0.1, 0.1, 1)
+shader_parameter/back_col = Vector4(0.6, 0.6, 0.6, 1)
+shader_parameter/arrow_mask = ExtResource("2_65loy")
+
+[node name="arrow_pivot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7opk2")
+
+[node name="arrow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xune8")
+layout_mode = 0
+offset_left = -40.0
+offset_top = -287.0
+offset_right = 40.0
+offset_bottom = -247.0

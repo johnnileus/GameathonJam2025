@@ -70,12 +70,7 @@ func process_movement(delta):
 	else:
 		speed = walkSpeed
 		state = states.walking
-	
 
-		
-		
-
-	
 	if moving:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
@@ -101,3 +96,11 @@ func _physics_process(delta):
 	process_movement(delta)
 
 	move_and_slide()
+	
+func _on_area_3d_area_entered(area):
+	print("a")
+
+func _on_area_3d_body_entered(body):
+	if body in get_tree().get_nodes_in_group("enemy"):
+		
+		body.die()

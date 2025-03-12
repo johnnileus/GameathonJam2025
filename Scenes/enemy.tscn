@@ -1,20 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnrc26j7fjw2h"]
+[gd_scene load_steps=12 format=3 uid="uid://bnrc26j7fjw2h"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_qo061"]
+[ext_resource type="PackedScene" uid="uid://c2axno01bmrh8" path="res://Assets/model_scenes/soldier.tscn" id="2_dg0nb"]
 [ext_resource type="Script" path="res://Scripts/enemy_fsm/state_machine.gd" id="2_tyexe"]
 [ext_resource type="Script" path="res://Scripts/enemy_fsm/patrol_state.gd" id="3_hk3dw"]
 [ext_resource type="Script" path="res://Scripts/enemy_fsm/chase_state.gd" id="4_ycvye"]
 [ext_resource type="Shader" path="res://Shaders/alert_icon.gdshader" id="5_pqruh"]
 [ext_resource type="Texture2D" uid="uid://b2o0afy0rnx7y" path="res://Assets/sprites/icon_mask.jpg" id="6_n2yf3"]
-[ext_resource type="Script" path="res://Scenes/alert_icon.gd" id="7_qlfc5"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pr615"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_j85mx"]
+[ext_resource type="Script" path="res://Scripts/alert_icon.gd" id="7_qlfc5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jv08m"]
+radius = 0.31925
+height = 1.5894
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c37lh"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("5_pqruh")
 shader_parameter/alert_progress = 0.319
@@ -32,18 +32,10 @@ script = ExtResource("1_qo061")
 
 [node name="model" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_pr615")
-skeleton = NodePath("")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="model"]
-transform = Transform3D(0.502376, 0, 0, 0, 0.41416, 0, 0, 0, 0.571208, 0, 1.43472, -0.465667)
-mesh = SubResource("BoxMesh_j85mx")
-skeleton = NodePath("")
+[node name="paladin" parent="model" instance=ExtResource("2_dg0nb")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799392, 0)
 shape = SubResource("CapsuleShape3D_jv08m")
 
 [node name="state_machine" type="Node3D" parent="."]
@@ -61,8 +53,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6431, 0)
 [node name="alert_icon" type="Node3D" parent="."]
 
 [node name="alert_mesh" type="MeshInstance3D" parent="alert_icon"]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 2.68343, 0)
+transform = Transform3D(0.5, 0, 8.7423e-08, 0, 0.5, 0, -8.7423e-08, 0, 0.5, 0, 2.21993, 0)
 material_override = SubResource("ShaderMaterial_c37lh")
 gi_mode = 0
 mesh = SubResource("QuadMesh_i4exw")
 script = ExtResource("7_qlfc5")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

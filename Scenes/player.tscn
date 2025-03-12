@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://chf7uxq1q34hp"]
+[gd_scene load_steps=5 format=3 uid="uid://chf7uxq1q34hp"]
 
 [ext_resource type="Script" path="res://Scripts/playerController.gd" id="1_8ag21"]
-[ext_resource type="PackedScene" uid="uid://dn3oq2ionkipb" path="res://Assets/ModelScenes/wolf.tscn" id="2_alof5"]
+[ext_resource type="PackedScene" uid="uid://dn3oq2ionkipb" path="res://Assets/model_scenes/wolf.tscn" id="2_alof5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i166c"]
 height = 1.18286
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4fi6b"]
+radius = 0.642425
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8ag21")
@@ -28,3 +31,11 @@ fov = 70.4562
 
 [node name="head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727242, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.702538, 0)
+shape = SubResource("CapsuleShape3D_4fi6b")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

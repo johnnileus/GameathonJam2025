@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3r48gm18w5o8"]
+
+[ext_resource type="PackedScene" uid="uid://c2w07ls6xltf8" path="res://Assets/base_models/floor/floor.glb" id="1_088tr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uqe2w"]
+size = Vector3(7.99194, 0.818115, 7.98145)
+
+[sub_resource type="BoxMesh" id="BoxMesh_duh1p"]
+
+[node name="floor" instance=ExtResource("1_088tr")]
+
+[node name="Cube" parent="." index="0"]
+visible = false
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_uqe2w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 0)
+mesh = SubResource("BoxMesh_duh1p")
