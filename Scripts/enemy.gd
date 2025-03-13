@@ -16,7 +16,9 @@ var current_target_index : int = 0
 var speed : float = .5
 
 var alertness = 0
-var alert_rate = .8
+var spotted_alert_rate = 1.5
+var running_alert_rate = 1.2
+var walking_alert_rate = .6
 var alert_decay = .3
 var alerted = false
 
@@ -27,12 +29,12 @@ func _ready():
 	
 	
 
-func increase_alert(delta):
-	alertness += alert_rate * delta
+func increase_alert(delta, amt):
+	alertness += amt * delta
 	if alertness > 1:
 		alertness = 1
-func decrease_alert(delta):
-	alertness -= alert_decay * delta
+func decrease_alert(delta, amt):
+	alertness -= amt * delta
 	if alertness < 0:
 		alertness = 0
 func raycast_to_player():
@@ -44,7 +46,6 @@ func raycast_to_player():
 	query.exclude = [self]
 	query.set_collision_mask(1 << 1 | 1 << 0)	
 	var result = space_state.intersect_ray(query)
-
 	if result and result.collider.name == "Player":
 		
 		return true
@@ -71,8 +72,6 @@ func is_player_visible():
 	else:
 		DebugDraw3D.draw_line(origin, end, Color(1,0,0))
 		return false
-		
-
 
 
 func look_at_direction(dir):
@@ -90,6 +89,9 @@ func die():
 	queue_free()
 	
 func _process(delta):
+	
+
+	
 	alert_mesh.alertness = alertness
 
 	model.global_rotation.y = lerp_angle(model.global_rotation.y, target_rot, 1 * delta)

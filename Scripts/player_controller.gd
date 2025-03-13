@@ -17,6 +17,7 @@ enum states {
 	running,
 	crouching
 }
+
 var stateAnims = {
 	states.idle: "04_Idle",
 	states.walking: "02_walk",
@@ -106,10 +107,3 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-func _on_area_3d_area_entered(area):
-	print("a")
-
-func _on_area_3d_body_entered(body):
-	if body in get_tree().get_nodes_in_group("enemy"):
-		
-		body.die()

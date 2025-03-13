@@ -132,11 +132,11 @@ libraries = {
 }
 
 [node name="slash1" type="Sprite3D" parent="."]
-transform = Transform3D(-0.0803375, 0.103576, -0.0651964, -0.166486, -0.041249, 0.0964344, 0.0382799, 0.037973, 0.282584, 0.101475, 0.458536, -1.25862)
+transform = Transform3D(-0.0803375, 0.103576, -0.0651964, -0.166486, -0.041249, 0.0964344, 0.0382799, 0.037973, 0.282584, -0.272743, 0.458536, -1.25862)
 texture = ExtResource("2_n0qof")
 
 [node name="slash2" type="Sprite3D" parent="."]
-transform = Transform3D(0.0870276, 0.100649, 0.0730819, -0.166506, 0.0484811, 0.0700918, 0.0184166, -0.037293, 0.288358, 0.101475, 0.769073, -1.25862)
+transform = Transform3D(0.0870276, 0.100649, 0.0730819, -0.166506, 0.0484811, 0.0700918, 0.0184166, -0.037293, 0.288358, 0.326722, 0.797829, -1.29772)
 texture = ExtResource("2_n0qof")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
