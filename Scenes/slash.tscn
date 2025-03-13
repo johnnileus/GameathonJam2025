@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhj36kp7xxrht"]
+[gd_scene load_steps=9 format=3 uid="uid://bhj36kp7xxrht"]
 
 [ext_resource type="Script" path="res://Scenes/slash.gd" id="1_1eik7"]
+[ext_resource type="Texture2D" uid="uid://bmg0jw33b7qo8" path="res://Assets/sprites/slash.png" id="2_n0qof"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i1ey5"]
 radius = 0.752934
@@ -11,9 +12,8 @@ radius = 0.752934
 transparency = 1
 albedo_color = Color(1, 0.521569, 1, 0.160784)
 
-[sub_resource type="Animation" id="Animation_k27yd"]
-resource_name = "slash"
-length = 0.5
+[sub_resource type="Animation" id="Animation_ffpli"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -21,10 +21,51 @@ tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.5),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slash1:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("slash2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_k27yd"]
+resource_name = "slash"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -40,20 +81,29 @@ tracks/1/keys = {
 "method": &"kill_self"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_ffpli"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("slash1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("slash2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7finj"]
@@ -80,3 +130,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_l6w8v")
 libraries = {
 "": SubResource("AnimationLibrary_7finj")
 }
+
+[node name="slash1" type="Sprite3D" parent="."]
+transform = Transform3D(-0.0803375, 0.103576, -0.0651964, -0.166486, -0.041249, 0.0964344, 0.0382799, 0.037973, 0.282584, 0.101475, 0.458536, -1.25862)
+texture = ExtResource("2_n0qof")
+
+[node name="slash2" type="Sprite3D" parent="."]
+transform = Transform3D(0.0870276, 0.100649, 0.0730819, -0.166506, 0.0484811, 0.0700918, 0.0184166, -0.037293, 0.288358, 0.101475, 0.769073, -1.25862)
+texture = ExtResource("2_n0qof")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
