@@ -16,33 +16,34 @@ func get_new_target():
 
 #TODO increase alert from movement based on distance
 func update(delta):
-	var result = enemy.is_player_visible()
-	var alert_increased = false
-	
-	var playerState = player.state
-	var dist_to_player = enemy.global_position.distance_to(player.global_position)
-	
-	#if result:
-		#enemy.increase_alert(delta, enemy.spotted_alert_rate)
-		#alert_increased = true
-	if playerState == player.states.running && dist_to_player < player.current_ball_size.x:
-		enemy.increase_alert(delta, enemy.running_alert_rate)
-		alert_increased = true
-	if playerState == player.states.walking && dist_to_player < player.current_ball_size.x:
-		enemy.increase_alert(delta, enemy.walking_alert_rate)
-		alert_increased = true
+	if !enemy.is_dead:
+		var result = enemy.is_player_visible()
+		var alert_increased = false
 		
-	if !alert_increased:
-		enemy.decrease_alert(delta, enemy.alert_decay)
+		var playerState = player.state
+		var dist_to_player = enemy.global_position.distance_to(player.global_position)
 		
-		
-	if last_changed + change_delay < Time.get_unix_time_from_system():
-		last_changed = Time.get_unix_time_from_system()
-		enemy.update_target_pos(get_new_target())
-		
+		if result:
+			enemy.increase_alert(delta, enemy.spotted_alert_rate)
+			alert_increased = true
+		if playerState == player.states.running && dist_to_player < player.current_ball_size.x:
+			enemy.increase_alert(delta, enemy.running_alert_rate)
+			alert_increased = true
+		if playerState == player.states.walking && dist_to_player < player.current_ball_size.x:
+			enemy.increase_alert(delta, enemy.walking_alert_rate)
+			alert_increased = true
+			
+		if !alert_increased:
+			enemy.decrease_alert(delta, enemy.alert_decay)
+			
+			
+		if last_changed + change_delay < Time.get_unix_time_from_system():
+			last_changed = Time.get_unix_time_from_system()
+			enemy.update_target_pos(get_new_target())
+			
 
 
-	if enemy.alertness == 1:
-		state_machine.transition_to("chase")
-		
+		if enemy.alertness == 1:
+			state_machine.transition_to("chase")
+			
 		

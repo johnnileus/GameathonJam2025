@@ -1,16 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhj36kp7xxrht"]
+[gd_scene load_steps=7 format=3 uid="uid://bhj36kp7xxrht"]
 
 [ext_resource type="Script" path="res://Scenes/slash.gd" id="1_1eik7"]
 [ext_resource type="Texture2D" uid="uid://bmg0jw33b7qo8" path="res://Assets/sprites/slash.png" id="2_n0qof"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i1ey5"]
 radius = 0.752934
-
-[sub_resource type="SphereMesh" id="SphereMesh_su6o4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6w8v"]
-transparency = 1
-albedo_color = Color(1, 0.521569, 1, 0.160784)
 
 [sub_resource type="Animation" id="Animation_ffpli"]
 length = 0.001
@@ -120,11 +114,6 @@ script = ExtResource("1_1eik7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728379, -1.29352)
 shape = SubResource("SphereShape3D_i1ey5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00259161, 0.713616, -1.25413)
-mesh = SubResource("SphereMesh_su6o4")
-surface_material_override/0 = SubResource("StandardMaterial3D_l6w8v")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {

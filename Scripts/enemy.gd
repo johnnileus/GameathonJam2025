@@ -22,8 +22,11 @@ var running_alert_rate = 1.2
 var walking_alert_rate = .6
 var alert_decay = .3
 var alerted = false
+var rot_blocked = false
 
 var target_rot = 0.0
+
+var is_dead = false
 
 func _ready():
 	update_target_pos(player.global_position)
@@ -66,10 +69,10 @@ func is_player_visible():
 	var end = player.get_node("head").global_position
 	
 	if abs(diff) < deg_to_rad(sight_angle):
-		DebugDraw3D.draw_line(origin, end, Color(0,1,0))
+		#DebugDraw3D.draw_line(origin, end, Color(0,1,0))
 		return visible
 	else:
-		DebugDraw3D.draw_line(origin, end, Color(1,0,0))
+		#DebugDraw3D.draw_line(origin, end, Color(1,0,0))
 		return false
 
 
@@ -85,27 +88,31 @@ func move_along_path(delta):
 
 
 func die():
-	get_parent().killed_enemies+=1
-	queue_free()
+	if !is_dead:
+		is_dead = true
+		play_anim("death")
+		get_parent().killed_enemies+=1
+		alert_mesh.visible = false
 
 func manage_anim():
-	if speed > 0.05:
-		play_anim("pistol_walk")
-	else:
+	if rot_blocked:
 		play_anim("pistol_idle")
+	else:
+		play_anim("pistol_walk")
 
 func play_anim(animation):
 	soldier.play_anim(animation)
 	
 func _process(delta):
 	
-	
-	
-	alert_mesh.alertness = alertness
+	if !is_dead:
+		alert_mesh.alertness = alertness
+		if !rot_blocked:
+			model.global_rotation.y = lerp_angle(model.global_rotation.y, target_rot, 1 * delta)
+			move_along_path(delta)
+		else:
+			speed = 0;
+		manage_anim()
+		
 
-	model.global_rotation.y = lerp_angle(model.global_rotation.y, target_rot, 1 * delta)
-	
-	manage_anim()
-	
-	move_along_path(delta)
-	move_and_slide()
+		move_and_slide()

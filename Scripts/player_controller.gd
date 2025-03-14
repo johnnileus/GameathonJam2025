@@ -10,6 +10,7 @@ var walkSpeed = 1.6
 var runSpeed = 5
 var crouchSpeed = .9
 var moving = false
+var is_dead = false
 
 enum states {
 	idle,
@@ -42,6 +43,7 @@ var state = states.idle
 @onready var anim = wolf.animation_player
 @onready var sound_ball = $sound_ball
 
+const MAIN_SCENE = preload("res://Scenes/main.tscn")
 const SLASH = preload("res://Scenes/slash.tscn")
 
 func _ready():
@@ -113,9 +115,18 @@ func process_attack():
 		slash.global_position = global_position
 		slash.global_rotation = model.global_rotation
 
-func _physics_process(delta):
-	process_movement(delta)
-	process_attack()
+func die():
+	is_dead = true
 
+func _physics_process(delta):
+	if !is_dead:
+		process_movement(delta)
+		process_attack()
+	else:
+		velocity = Vector3()
+	
+	if Input.is_action_pressed("reset"):
+		get_tree().change_scene_to_file("res://Scenes/main.tscn")
+		
 	move_and_slide()
 	

@@ -21,16 +21,17 @@ func _process(delta):
 	delete_children()
 	
 	for enemy in enemies:
-		var vec_diff = (player.global_position - enemy.global_position).normalized()
-		var vec_angle = Vector2(vec_diff.x, vec_diff.z).angle()
-		var camera_rot = player.camera.global_rotation
-		
-		var new_arrow = arrow.instantiate()
-		new_arrow.rotation = vec_angle + camera_rot.y - PI/2
-		var arrow_mesh = new_arrow.get_node("arrow")
-		arrow_mesh.material.set_shader_parameter("alert_progress", enemy.alertness)
+		if !enemy.is_dead:
+			var vec_diff = (player.global_position - enemy.global_position).normalized()
+			var vec_angle = Vector2(vec_diff.x, vec_diff.z).angle()
+			var camera_rot = player.camera.global_rotation
+			
+			var new_arrow = arrow.instantiate()
+			new_arrow.rotation = vec_angle + camera_rot.y - PI/2
+			var arrow_mesh = new_arrow.get_node("arrow")
+			arrow_mesh.material.set_shader_parameter("alert_progress", enemy.alertness)
 
 
-		add_child(new_arrow)
-		
+			add_child(new_arrow)
+			
 	
