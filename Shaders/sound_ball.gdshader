@@ -6,7 +6,7 @@ render_mode unshaded, cull_disabled;
 
 uniform sampler2D depth_texture : source_color, hint_depth_texture;
 uniform vec4 color1: source_color = vec4(1,1,1,.1);
-uniform vec4 color2: source_color = vec4(1,1,1,1);
+uniform vec4 color2: source_color = vec4(1,1,1,0);
 uniform float threshold = .2;
 uniform float fresnel_sharpness = 1.0;
 
@@ -30,7 +30,7 @@ void fragment() {
 	
 	if (linear_depth - linear_object_depth > threshold) {
 		ALBEDO = color1.rgb;
-		ALPHA = 0.05;
+		ALPHA = 0.0;
 	}
 	else {
 		ALBEDO = color2.rgb;

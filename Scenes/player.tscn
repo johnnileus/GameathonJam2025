@@ -53,6 +53,7 @@ shape = SubResource("CapsuleShape3D_4fi6b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.804544, 0)
 
 [node name="sound_ball_mesh" type="MeshInstance3D" parent="sound_ball"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("SphereMesh_omhgd")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_1ywsd")

@@ -27,7 +27,7 @@ var stateAnims = {
 
 var ball_sizes = {
 	states.idle: Vector3(0,0,0),
-	states.walking: Vector3(10,10,10),
+	states.walking: Vector3(6,6,6),
 	states.running: Vector3(25,25,25),
 	states.crouching: Vector3(0,0,0)
 }
@@ -97,7 +97,6 @@ func process_movement(delta):
 		velocity.z = lerp(velocity.z, 0.0, delta * 15.0)
 		if not inputting:
 			state = states.idle
-	print(current_ball_size, ball_sizes[state])
 	current_ball_size = lerp(current_ball_size, ball_sizes[state], ball_lerp_speed)
 	sound_ball.scale = current_ball_size
 	
