@@ -24,6 +24,15 @@ var stateAnims = {
 	states.running: "01_Run",
 	states.crouching: "03_creep"
 }
+
+var ball_sizes = {
+	states.idle: Vector3(0,0,0),
+	states.walking: Vector3(10,10,10),
+	states.running: Vector3(25,25,25),
+	states.crouching: Vector3(0,0,0)
+}
+var current_ball_size = Vector3(0,0,0)
+var ball_lerp_speed = .15
 var state = states.idle
 @onready var camera_pivot_y = $camera_pivot_y
 @onready var camera_pivot_x = $camera_pivot_y/camera_pivot_x
@@ -31,6 +40,7 @@ var state = states.idle
 @onready var model = $model
 @onready var wolf = $model/wolf
 @onready var anim = wolf.animation_player
+@onready var sound_ball = $sound_ball
 
 const SLASH = preload("res://Scenes/slash.tscn")
 
@@ -87,6 +97,9 @@ func process_movement(delta):
 		velocity.z = lerp(velocity.z, 0.0, delta * 15.0)
 		if not inputting:
 			state = states.idle
+	print(current_ball_size, ball_sizes[state])
+	current_ball_size = lerp(current_ball_size, ball_sizes[state], ball_lerp_speed)
+	sound_ball.scale = current_ball_size
 	
 	anim.play(stateAnims[state])
 	if not moving and state == states.crouching:

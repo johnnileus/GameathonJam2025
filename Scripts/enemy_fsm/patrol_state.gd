@@ -13,6 +13,8 @@ func get_new_target():
 	var offset = Vector2(cos(angle), sin(angle)) * change_distance
 	return enemy.global_position + Vector3(offset.x, 0, offset.y)
 
+
+#TODO increase alert from movement based on distance
 func update(delta):
 	var result = enemy.is_player_visible()
 	var alert_increased = false

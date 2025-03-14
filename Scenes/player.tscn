@@ -1,13 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://chf7uxq1q34hp"]
+[gd_scene load_steps=8 format=3 uid="uid://chf7uxq1q34hp"]
 
 [ext_resource type="Script" path="res://Scripts/player_controller.gd" id="1_8ag21"]
 [ext_resource type="PackedScene" uid="uid://dn3oq2ionkipb" path="res://Assets/model_scenes/wolf.tscn" id="2_alof5"]
+[ext_resource type="Shader" path="res://Shaders/sound_ball.gdshader" id="3_1djhj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i166c"]
 height = 1.18286
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4fi6b"]
 radius = 0.642425
+
+[sub_resource type="SphereMesh" id="SphereMesh_omhgd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ywsd"]
+render_priority = 0
+shader = ExtResource("3_1djhj")
+shader_parameter/color1 = Color(1, 1, 1, 0.1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/threshold = 0.2
+shader_parameter/fresnel_sharpness = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_8ag21")
@@ -37,5 +48,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.727242, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.702538, 0)
 shape = SubResource("CapsuleShape3D_4fi6b")
+
+[node name="sound_ball" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.804544, 0)
+
+[node name="sound_ball_mesh" type="MeshInstance3D" parent="sound_ball"]
+mesh = SubResource("SphereMesh_omhgd")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_1ywsd")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
