@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnrc26j7fjw2h"]
+[gd_scene load_steps=12 format=3 uid="uid://bnrc26j7fjw2h"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_qo061"]
 [ext_resource type="PackedScene" uid="uid://c2axno01bmrh8" path="res://Assets/model_scenes/soldier.tscn" id="2_dg0nb"]
@@ -8,7 +8,6 @@
 [ext_resource type="Shader" path="res://Shaders/alert_icon.gdshader" id="5_pqruh"]
 [ext_resource type="Texture2D" uid="uid://b2o0afy0rnx7y" path="res://Assets/sprites/icon_mask.jpg" id="6_n2yf3"]
 [ext_resource type="Script" path="res://Scripts/alert_icon.gd" id="7_qlfc5"]
-[ext_resource type="PackedScene" uid="uid://bydfswpt6lvrd" path="res://Assets/mixamo_animations/enemy_anims.glb" id="9_tkjhx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jv08m"]
 radius = 0.31925
@@ -33,7 +32,7 @@ script = ExtResource("1_qo061")
 
 [node name="model" type="Node3D" parent="."]
 
-[node name="paladin" parent="model" instance=ExtResource("2_dg0nb")]
+[node name="soldier" parent="model" instance=ExtResource("2_dg0nb")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.799392, 0)
@@ -61,6 +60,3 @@ mesh = SubResource("QuadMesh_i4exw")
 script = ExtResource("7_qlfc5")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="enemy_anims" parent="." instance=ExtResource("9_tkjhx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.62224, 0, 0.00789237)

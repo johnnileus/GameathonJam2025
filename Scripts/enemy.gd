@@ -8,12 +8,13 @@ extends CharacterBody3D
 @onready var player: Node3D = get_tree().get_first_node_in_group("player")
 
 @onready var model = $model
+@onready var soldier = $model/soldier
 
 @export var sight_angle = 40
 
 var path : Array = []
 var current_target_index : int = 0
-var speed : float = .5
+var speed : float = .3
 
 var alertness = 0
 var spotted_alert_rate = 1.5
@@ -26,8 +27,6 @@ var target_rot = 0.0
 
 func _ready():
 	update_target_pos(player.global_position)
-	
-	
 
 func increase_alert(delta, amt):
 	alertness += amt * delta
@@ -83,18 +82,30 @@ func move_along_path(delta):
 	look_at_direction(direction)
 	
 	velocity = velocity.lerp(direction * speed, 1 * delta) + Vector3.DOWN*9.81*delta
-	
+
+
 func die():
 	get_parent().killed_enemies+=1
 	queue_free()
+
+func manage_anim():
+	if speed > 0.05:
+		play_anim("pistol_walk")
+	else:
+		play_anim("pistol_idle")
+
+func play_anim(animation):
+	soldier.play_anim(animation)
 	
 func _process(delta):
 	
-
+	
 	
 	alert_mesh.alertness = alertness
 
 	model.global_rotation.y = lerp_angle(model.global_rotation.y, target_rot, 1 * delta)
-
+	
+	manage_anim()
+	
 	move_along_path(delta)
 	move_and_slide()
